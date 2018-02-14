@@ -1,15 +1,28 @@
+var keyMap = {
+   8: 'onBackspace',
+  37: 'onArrowLeft',
+  38: 'onArrowUp',
+  39: 'onArrowRight',
+  40: 'onArrowDown',
+}
+
+function isSpecialKey(keyCode) {
+  if(keyMap[keyCode] !== undefined) return true
+  return false
+}
+function handleSpecialKey(keyCode, nodesAndPos) {
+  nodesAndPos = window[keyMap[keyCode]](nodesAndPos)
+  return nodesAndPos
+}
 function onArrowDown(nodesAndPos) {
 }
 function onArrowLeft(nodesAndPos) {
-  var nodes = nodesAndPos[0]
-  var pos = 1
-  pos -= nodesAndPos[1]
   nodesAndPos = moveCursor(nodesAndPos, -1)
-  nodes = nodesAndPos[0]
-  nodesAndPos = [nodes, pos]
   return nodesAndPos
 }
 function onArrowRight(nodesAndPos) {
+  nodesAndPos = moveCursor(nodesAndPos, 1)
+  return nodesAndPos
 }
 function onArrowUp(nodesAndPos) {
 }
@@ -21,16 +34,3 @@ function onBackspace(nodesAndPos) {
   nodesAndPos = [nodes, pos-1]
   return nodesAndPos
 }
-
-/*
-    if(eve.keyCode ==  8) { // backspace
-      nodes[0].textContent = nodes[0].textContent.slice(
-                                        0, nodes[0].textContent.length-1);
-    }
-    else if(eve.keyCode == 37) {
-    }
-    else if(eve.keyCode == 38) {
-      nodesAndPos = moveCursor(nodesAndPos,  1)
-      nodes = nodesAndPos[0]
-    }
-*/
