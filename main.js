@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(eve) {
 setInterval(function(){window.location.href=window.location.href},
-7777) // Development-helper: Reload page every n ms.
+77777) // Development-helper: Reload page every n ms.
 
 
   // Initiate app:
@@ -36,17 +36,11 @@ function main(ele) {
   var nodesAndPos = [nodes, pos]
   ele.tabIndex = 0
   ele.focus()
+  ele.onclick = function(eve) {
+      getCharPosInEleOfClickPos(eve)
+  }
   ele.onkeypress = function(eve) {
-//console.log(nodesAndPos)
     if(isSpecialKey(eve.keyCode)) nodesAndPos = handleSpecialKey(eve.keyCode, nodesAndPos)
-/*
-console.log(eve)
-console.log(eve.keyCode)
-console.log(nodes)
-    if     (eve.keyCode ==  8) nodesAndPos = onBackspace(nodesAndPos)
-    else if(eve.keyCode == 37) nodesAndPos = onArrowLeft(nodesAndPos)
-    else if(eve.keyCode == 38) nodesAndPos = onArrowRight(nodesAndPos)
-*/
     else {
       nodes = nodesAndPos[0]
       nodes[0].textContent += String.fromCharCode(eve.charCode)
