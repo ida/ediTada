@@ -40,3 +40,65 @@ console.log(getEleRightPos(ele))
   ele.innerHTML = wrapperEle.innerHTML
 //  return charPos
 }
+
+var wrapperEle = null
+var clickedEle = null
+var clickPosLeft = null
+var posIsMet = false
+var texts = []
+var text = null
+function removeAndStoreTextToTexts(textNode) {
+  texts.push(textNode.textContent)
+  textNode.textContent = ''
+}
+function refillTextUntilPosIsMet(node) {
+  var character = null
+  var textNode = null
+  if(node instanceof Text) {
+    textNode = node
+    text = texts.shift()
+  }
+  else if(node instanceof Element) {
+    textNode = node.firstChild
+  }
+  for(var j in text) {
+    character = text[j]
+    if(getEleRightPos(textNode.parentNode) >= clickPosLeft) {
+      posIsMet = true
+    }
+    if(posIsMet == false) {
+      textNode.textContent += character
+    }
+  }
+}
+function handleClick(clickEvent) {
+/*
+On a click, get the char-pos corresponding to click pos.
+We need to empty the ele of text and refill it char by char,
+so we can measure the current width and when it meets the
+click-x-pos, insert the cursor.
+*/
+
+  clickedEle = clickEvent.target
+  clickPosLeft = clickEvent.clientX
+  posIsMet = false
+  texts = []
+  text = null
+  wrapperEle = document.createElement('span')
+
+
+  // Make wrapperEle dimensions measureable:
+  wrapperEle.style.display = 'inline-block'
+  // Move childNodes of clickedEle into wrapperEle:
+  while(clickedEle.firstChild) wrapperEle.appendChild(clickedEle.firstChild)
+  // Insert wrapperEle into clickedEle:
+  clickedEle.appendChild(wrapperEle)
+  
+
+  forEachTextNode(clickedEle, removeAndStoreTextToTexts)
+  forEachNode(clickedEle, refillTextUntilPosIsMet)
+
+
+}
+
+// EOF

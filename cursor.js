@@ -1,9 +1,11 @@
 function insertCursor(node, startPos, endPos=startPos) {
   endPos+=1 // DEV: test selected text
 
-  // Replace text-node with three new nodes representing
-  // text from start to cursor, cursor and selected text 
-  // in cursor, and text from cursor to end.
+  // Replace text-node with three new nodes representing:
+  // - text from start to cursor
+  // - cursor and selected text 
+  // - text from cursor to end
+
 
   // Create nodes:
   var nodeStart  = document.createTextNode('')
@@ -43,6 +45,7 @@ function moveCursor(nodesAndPos, diff=1) {
       pos = node.nodeValue.length-1
     }
   }
+  // Position is greater than last pos:
   else if(pos > node.nodeValue.length-1) {
       node = getNextTextNode(node)
       pos = 0
@@ -53,9 +56,9 @@ function moveCursor(nodesAndPos, diff=1) {
 
 function removeCursor(nodes) {
   // Undo insertCursor(): Merge three nodes into one text-node.
-    nodes[0].nodeValue += nodes[1].textContent += nodes[2].nodeValue
-    nodes[1].remove()
-    nodes[2].remove()
-    return nodes[0]
+  nodes[0].nodeValue += nodes[1].textContent += nodes[2].nodeValue
+  nodes[1].remove()
+  nodes[2].remove()
+  return nodes[0]
 }
 
