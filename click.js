@@ -1,12 +1,7 @@
 function getPosRight(ele) {
   return ele.getBoundingClientRect().right
 }
-var clickPosLeft = null
-var clickPosTop = null
-var texts = []
 function handleClick(eve) {
-  clickPosLeft = eve.clientX
-  clickPosTop = eve.clientX
 // Rerender text char by char and insert cursor when ele-width meets click-pos.
   var character = null
   var clickedEle = eve.target
@@ -14,6 +9,7 @@ function handleClick(eve) {
   var foundPos = false
   var wrapperEle = null
   var text = null
+  var texts = []
   // Collect and remove all texts of text-nodes:
   forEachTextNode( clickedEle, function(node) {
     texts.push(node.textContent)
@@ -46,28 +42,12 @@ function handleClick(eve) {
     else if(foundPos === true) {
       node.textContent = text
     }
+    // Lastly move nodes of wrapperEle into clickedEle:
+//    moveChildren(wrapperEle, clickedEle)
+    // And remove wrapperEle:
+//    wrapperEle.remove()
   });
 }
 function posisAreMet(wrapperEle, clickPosis) {
   return getPosRight(wrapperEle) >= clickPosis[0]
 }
-//////////////////////////////////////////////////////////////////////////
-/*
-  var charPos = null
-  var ele = eve.target
-  var html = ele.innerHTML
-
-  // Empty ele:
-  ele.innerHTML = '' // empty ele
-
-
-  // Refill ele char by char until clickPosis are met or exceeded:
-  for(var i in html) {
-    var char = html[i]
-    if(getEleRightPos(wrapperEle) >= clickPosLeft) {
-	    return i
-    }
-    wrapperEle.innerHTML += char
-
-  ele.innerHTML = wrapperEle.innerHTML
-*/
