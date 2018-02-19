@@ -63,7 +63,7 @@ function refillTextUntilPosIsMet(node) {
   }
   for(var j in text) {
     character = text[j]
-    if(getEleRightPos(textNode.parentNode) >= clickPosLeft) {
+    if(getEleRightPos(wrapperEle) >= clickPosLeft) {
       posIsMet = true
     }
     if(posIsMet == false) {
