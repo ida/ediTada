@@ -13,6 +13,7 @@ function handleSpecialKey(keyCode, nodesAndPos) {
 }
 function insertChar(eve, nodesAndPos) {
   nodes = nodesAndPos[0]
+  pos = nodesAndPos[1]
   nodes[0].textContent += String.fromCharCode(eve.charCode)
   pos += 1
   nodesAndPos[1] = pos

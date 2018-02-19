@@ -1,3 +1,12 @@
+function moveChildren(sourceEle, targetEle) {
+  while(sourceEle.firstChild) targetEle.appendChild(sourceEle.firstChild)
+}
+function getEleBottomPos(ele) {
+  return ele.getBoundingClientRect().bottom
+}
+function getEleRightPos(ele) {
+  return ele.getBoundingClientRect().right
+}
 function forEachEle(ele, doSth=null, eles=[]) {
   for(var j=0; j < ele.children.length; j++) {
     var child = ele.children[j]

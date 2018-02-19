@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function(eve) {
-setInterval(function(){window.location.href=window.location.href},
-77777) // Development-helper: Reload page every n ms.
 
 
   // Initiate app:
